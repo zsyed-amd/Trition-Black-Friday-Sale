@@ -121,7 +121,7 @@ export default function DashboardBar({ metrics, activeTab, onTabChange, onRush, 
           </div>
         </div>
 
-        <div className={styles.tabNav}>
+        <div className={styles.tabNav} data-tour="results">
           {TABS.map((label, i) => (
             <button
               key={label}

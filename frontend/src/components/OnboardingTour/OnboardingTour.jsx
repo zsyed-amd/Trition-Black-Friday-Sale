@@ -30,14 +30,7 @@ const STEPS = [
     target: '[data-tour="results"]',
     title: 'Live Dashboard Panels',
     body: 'Four tabs show: model configuration, an example workload, live Triton metrics (throughput, latency, GPU utilization), and a business-impact read-out.',
-    position: 'left',
-  },
-  {
-    target: '[data-tour="cards"]',
-    title: 'Explore the Tech Stack',
-    body: 'Click any card to learn more about the hardware and software powering this demo — from MI300X specs to ROCm documentation.',
-    position: 'top',
-    scrollBlock: 'end',
+    position: 'bottom',
   },
 ]
 
@@ -45,7 +38,10 @@ function getTooltipPos(rect, position) {
   const centreX = Math.max(12, Math.min(rect.left + rect.width / 2 - TOOLTIP_W / 2, window.innerWidth - TOOLTIP_W - 12))
 
   if (position === 'bottom') return { top: rect.bottom + GAP, left: centreX, width: TOOLTIP_W }
-  if (position === 'top')    return { bottom: window.innerHeight - rect.top + GAP, left: centreX, width: TOOLTIP_W }
+  if (position === 'top') {
+    const idealTop = rect.top - PAD - GAP - 220
+    return { top: Math.max(12, idealTop), left: centreX, width: TOOLTIP_W }
+  }
   if (position === 'right')  return { top: rect.top, left: rect.right + GAP, width: TOOLTIP_W }
   if (position === 'left')   return { top: rect.top, left: rect.left - GAP - TOOLTIP_W, width: TOOLTIP_W }
 }
@@ -100,7 +96,7 @@ export default function OnboardingTour({ theme = 'dark', onToggle }) {
 
   const showTour   = visible && rect
   const current    = STEPS[step]
-  const tooltipPos = rect ? getTooltipPos(rect, current.position) : null
+  const tooltipPos = rect ? (current.staticPos ?? getTooltipPos(rect, current.position)) : null
   const isDark     = theme === 'dark'
 
   return (

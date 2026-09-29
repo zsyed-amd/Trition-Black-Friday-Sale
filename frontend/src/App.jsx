@@ -113,7 +113,7 @@ export default function App() {
         onReset={handleReset}
       />
 
-      <main className={styles.main} data-tour="results">
+      <main className={styles.main}>
         {screens[activeTab]}
         <FeatureCards />
       </main>
