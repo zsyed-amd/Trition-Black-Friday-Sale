@@ -36,6 +36,7 @@ export default function DashboardBar({ metrics, activeTab, onTabChange, onRush, 
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
     >
+      <div className={styles.pill}>
       <div className={styles.inner}>
         <div className={styles.topRow}>
           <div className={styles.titleBlock}>
@@ -120,7 +121,7 @@ export default function DashboardBar({ metrics, activeTab, onTabChange, onRush, 
           </div>
         </div>
 
-        <div className={styles.tabNav}>
+        <div className={styles.tabNav} data-tour="results">
           {TABS.map((label, i) => (
             <button
               key={label}
@@ -137,6 +138,7 @@ export default function DashboardBar({ metrics, activeTab, onTabChange, onRush, 
         This UI is an <strong>illustrative concept</strong> for this demo. In LIVE mode the numbers
         are real, measured against your Triton server; in SIMULATED mode (no Triton reachable) they
         follow a scripted ramp for rehearsal.
+      </div>
       </div>
     </motion.div>
   )
